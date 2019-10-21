@@ -7,6 +7,6 @@ plt.plot(x, y)
 plt.xlabel('Plot Number')
 plt.ylabel('Random #')
 
-plt.title('epic Graph tutorial for data viz in Python with Matplotlib. \nTutorial showing labels and titles')
+plt.title('Epic Graph tutorial for data viz in Python with Matplotlib. \nTutorial showing labels and titles')
 
 plt.show()
