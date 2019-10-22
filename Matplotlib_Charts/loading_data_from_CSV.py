@@ -4,7 +4,7 @@ import csv
 x = []
 y = []
 
-with open('csv_example.txt' ,'r') as csvfile:
+with open('./matplotlib_notes/Matplotlib_Charts/csv_example.txt' ,'r') as csvfile:
     plots = csv.reader(csvfile, delimiter=',')
     for row in plots:
         x.append(int(row[0]))
