@@ -1,2 +1,2 @@
-# matplotlib_notes
-Data Visualiztion with Python
+# Data Visualiztion with Python
+Python and Matplotlib
