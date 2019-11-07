@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 fig = plt.figure()
 
+
 def create_plots():
     xs = []
     ys = []
