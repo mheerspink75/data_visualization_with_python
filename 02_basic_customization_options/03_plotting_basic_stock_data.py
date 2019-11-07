@@ -3,6 +3,7 @@ import matplotlib.dates as mdates
 import urllib.request
 import numpy as np
 import datetime as dt
+import time
 
 
 def bytespdate2num(fmt, encoding='utf-8'):
@@ -27,7 +28,7 @@ def graph_data(stock):
             if 'values' not in each_line:
                 stock_data.append(each_line)
 
-    date, open, high, low, close, volume = np.loadtxt(stock_data, delimiter=',', unpack=True)
+    date, open, high, low, close, volume = np.loadtxt(stock_data, delimiter=',', unpack=True, converters={0: bytespdate2num('%Y%m%d')})
 
     date_conv = np.vectorize(dt.datetime.fromtimestamp)
     date =date_conv(date)
