@@ -4,7 +4,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
 APIs.md
+ohlc_chart.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
