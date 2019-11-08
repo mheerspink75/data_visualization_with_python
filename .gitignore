@@ -6,7 +6,6 @@
 *.code-workspace
 
 APIs.md
-ohlc_chart.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
