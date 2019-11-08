@@ -1,41 +1,50 @@
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import urllib.request
 import numpy as np
-import datetime as dt
-import time
-
+import urllib.request
+import matplotlib.dates as mdates
 
 def bytespdate2num(fmt, encoding='utf-8'):
-    str_converter = mdates.datestr2num(fmt)
-    def bytes_converter(b):
+    strconverter = mdates.strpdate2num(fmt)
+    def bytesconverter(b):
         s = b.decode(encoding)
-        return str_converter(s)
-    return bytes_converter
-
+        return strconverter(s)
+    return bytesconverter
+    
 
 def graph_data(stock):
-    print('Currently pulling: ', stock)
-    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + \
-        stock + '&interval=5min&apikey=K6QCETUG7BJZW11N&datatype=csv'
-    source_code = urllib.request.urlopen(url).read().decode()
+    # Unfortunately, Yahoo's API is no longer available
+    # feel free to adapt the code to another source, or use this drop-in replacement.
+    stock_price_url = 'https://pythonprogramming.net/yahoo_finance_replacement'
+    source_code = urllib.request.urlopen(stock_price_url).read().decode()
     stock_data = []
     split_source = source_code.split('\n')
+    for line in split_source[1:]:
+        split_line = line.split(',')
+        if len(split_line) == 7:
+            if 'values' not in line and 'labels' not in line:
+                stock_data.append(line)
 
-    for each_line in split_source:
-        split_line = each_line.split(',')
-        if len(split_line) == 6:
-            if 'values' not in each_line:
-                stock_data.append(each_line)
+    date, closep, highp, lowp, openp, adj_closep, volume = np.loadtxt(stock_data,
+                                                          delimiter=',',
+                                                          unpack=True,
+                                                          # %Y = full year. 2015
+                                                          # %y = partial year 15
+                                                          # %m = number month
+                                                          # %d = number day
+                                                          # %H = hours
+                                                          # %M = minutes
+                                                          # %S = seconds
+                                                          # 12-06-2014
+                                                          # %m-%d-%Y
+                                                          converters={0: bytespdate2num('%Y-%m-%d')})
 
-    date, open, high, low, close, volume = np.loadtxt(stock_data, delimiter=',', unpack=True, converters={0: bytespdate2num('%Y%m%d')})
-
-    date_conv = np.vectorize(dt.datetime.fromtimestamp)
-    date =date_conv(date)
-
-    plt.plot_date(date, close, '-')
+    plt.plot_date(date, closep,'-', label='Price')
+ 
+    plt.xlabel('Date')
+    plt.ylabel('Price')
+    plt.title('Interesting Graph\nCheck it out')
+    plt.legend()
     plt.show()
 
 
-stock = input('Stock to plot: ')
-graph_data(stock)
+graph_data('TSLA')
