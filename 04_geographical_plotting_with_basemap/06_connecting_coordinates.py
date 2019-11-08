@@ -36,7 +36,8 @@ print(land_check)
 
 m.plot(xs, ys, 'r', linewidth=2, label='Flight 115')
 
-m.drawgreatcircle(hlon, hlat, blon, blat, linewidth=2, color='c', label='Great circle')
+m.drawgreatcircle(hlon, hlat, blon, blat, linewidth=2,
+                  color='c', label='Great circle')
 
 plt.legend()
 plt.title('Basemap Example with Title')
