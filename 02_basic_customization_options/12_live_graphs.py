@@ -3,7 +3,7 @@ from matplotlib import style
 import matplotlib.animation as animation
 import random
 
-style.use('customstyle')
+# style.use('customstyle')
 
 fig = plt.figure()
 ax1 = fig.add_subplot(1, 1, 1)

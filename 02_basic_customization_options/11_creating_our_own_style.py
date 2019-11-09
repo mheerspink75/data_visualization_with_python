@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib import style
 import random
 
-style.use('customstyle')
+# style.use('customstyle')
 
 for label in range(8):
     x = []
